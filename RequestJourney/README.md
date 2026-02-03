@@ -1,3 +1,9 @@
+**The Request Journey**.
+
+Click a step to trace a user request from laptop to database
+
+Above files are html+css code of below images
+
 <img width="1438" height="536" alt="image" src="https://github.com/user-attachments/assets/a30d8f0e-03ce-40f4-97fe-8e48ce3cb9b6" />
 <img width="1425" height="535" alt="image" src="https://github.com/user-attachments/assets/f787953e-d642-4c0b-a93f-f1b077073e02" />
 <img width="1429" height="537" alt="image" src="https://github.com/user-attachments/assets/ec64fb0c-1831-4570-8534-526580f78c7d" />

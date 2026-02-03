@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>WAF & Load Balancer – Request Journey</title>
+
+<style>
+:root {
+  --bg: #050812;
+  --sidebar: #0b1427;
+  --card: #0f1c34;
+  --border: #1d2c4a;
+  --accent: #2aa9ff;
+  --muted: #8ea4c1;
+  --text: #e6eefc;
+  --success: #2cff9b;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Inter, system-ui, sans-serif;
+}
+
+body {
+  background: radial-gradient(circle at top, #0f1b33, #050812);
+  color: var(--text);
+  height: 100vh;
+  display: flex;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  width: 100%;
+}
+
+/* Sidebar */
+.sidebar {
+  background: linear-gradient(180deg, #0b1427, #070c18);
+  padding: 24px;
+  border-right: 1px solid var(--border);
+}
+
+.sidebar h2 {
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+.sidebar p {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 28px;
+}
+
+.step {
+  display: flex;
+  gap: 12px;
+  padding: 14px 0;
+}
+
+.circle {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  display: grid;
+  place-items: center;
+  font-weight: 600;
+}
+
+.step.active .circle {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.step-title {
+  font-size: 14px;
+}
+
+.step-sub {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* Main */
+.main {
+  padding: 48px;
+}
+
+.card {
+  background: linear-gradient(180deg, #0f1c34, #0a1326);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 36px;
+  max-width: 920px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.45);
+}
+
+.card-header {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #2aa9ff, #4facfe);
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+}
+
+.card h1 {
+  font-size: 24px;
+}
+
+.card p {
+  margin-top: 14px;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #d3def5;
+}
+
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 30px 0;
+}
+
+.section-title {
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.tech-box {
+  background: #060d1b;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 18px;
+  font-size: 13px;
+}
+
+.tech-box span {
+  color: var(--success);
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h2>The Request Journey</h2>
+    <p>Click a step to trace a user request from laptop to database.</p>
+
+    <div class="step">
+      <div class="circle">1</div>
+      <div>
+        <div class="step-title">Client Device</div>
+        <div class="step-sub">Browser / Mobile App</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="circle">2</div>
+      <div>
+        <div class="step-title">DNS Resolution</div>
+        <div class="step-sub">Route53 / Public DNS</div>
+      </div>
+    </div>
+
+    <div class="step active">
+      <div class="circle">3</div>
+      <div>
+        <div class="step-title">WAF & Load Balancer</div>
+        <div class="step-sub">AWS ALB + WAF</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="circle">4</div>
+      <div>
+        <div class="step-title">Ingress Controller</div>
+        <div class="step-sub">Nginx / ALB Controller</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="circle">5</div>
+      <div>
+        <div class="step-title">Service Discovery</div>
+        <div class="step-sub">K8s Service (ClusterIP)</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <main class="main">
+    <div class="card">
+
+      <div class="card-header">
+        <div class="icon">🛡️</div>
+        <h1>3. WAF & Load Balancer</h1>
+      </div>
+
+      <p>
+        The request hits the <b>Application Load Balancer</b> in the public subnet.
+        <b>AWS WAF</b> inspects the request for malicious patterns such as
+        SQL injection and XSS attacks.  
+        The ALB terminates <b>SSL/TLS</b> here and decrypts the traffic.
+      </p>
+
+      <div class="divider"></div>
+
+      <div class="section-title">TECHNICAL BREAKDOWN</div>
+
+      <div class="tech-box">
+        Protocol / Tools:
+        <span>HTTPS/443, SSL Offloading, WAF Rules</span>
+      </div>
+
+    </div>
+  </main>
+
+</div>
+
+</body>
+</html>

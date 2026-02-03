@@ -2,6 +2,9 @@
 I built a production-ready DevSecOps platform on AWS that automates the entire software lifecycle. It uses a multi-account strategy for security, Terraform for infrastructure, and ArgoCD for zero-touch Kubernetes deployments.
 
 
+<img width="1420" height="525" alt="image" src="https://github.com/user-attachments/assets/e23a31c9-d891-4d6f-b30f-b163a53339b8" />
+
+
 ☁️ CloudPay Enterprise DevSecOps Platform
 StatusLicense
 
